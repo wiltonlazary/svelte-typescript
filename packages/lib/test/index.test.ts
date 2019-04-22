@@ -1,4 +1,4 @@
-import preprocess from '../src/svelte-ts-preprocess'
+import preprocess from '../src/index'
 
 describe('preprocess test', () => {
   it('should be function', () => {
