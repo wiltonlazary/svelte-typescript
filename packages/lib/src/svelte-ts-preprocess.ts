@@ -50,27 +50,39 @@ interface File {
 
 function createProxyHost(host: ts.CompilerHost, file: File) {
   const proxy: ts.CompilerHost = {
-    getSourceFile: (
-      fileName: string,
+    getSourceFile(
+      filename: string,
       languageVersion: ts.ScriptTarget,
       _onError?: (message: string) => void
-    ) => {
-      return fileName === file.name
+    ) {
+      filename = ts.sys.resolvePath(filename)
+      return filename === file.name
         ? ts.createSourceFile(file.name, file.content, languageVersion)
-        : host.getSourceFile(fileName, languageVersion, _onError)
+        : host.getSourceFile(filename, languageVersion, _onError)
     },
-    writeFile: (_fileName, _content) => {
+
+    writeFile: (_filename, _content) => {
       throw new Error('unsupported')
     },
-    getCanonicalFileName: fileName =>
-      fileName === file.name
-        ? ts.sys.useCaseSensitiveFileNames
-          ? fileName
-          : fileName.toLowerCase()
-        : host.getCanonicalFileName(fileName),
 
-    fileExists: fileName => (fileName === file.name ? true : host.fileExists(fileName)),
-    readFile: fileName => (fileName === file.name ? file.content : host.readFile(fileName)),
+    getCanonicalFileName(filename) {
+      filename = ts.sys.resolvePath(filename)
+      return filename === file.name
+        ? ts.sys.useCaseSensitiveFileNames
+          ? filename
+          : filename.toLowerCase()
+        : host.getCanonicalFileName(filename)
+    },
+
+    fileExists(filename) {
+      filename = ts.sys.resolvePath(filename)
+      return filename === file.name ? true : host.fileExists(filename)
+    },
+
+    readFile(filename) {
+      filename = ts.sys.resolvePath(filename)
+      return filename === file.name ? file.content : host.readFile(filename)
+    },
 
     getDefaultLibFileName: host.getDefaultLibFileName.bind(host),
     getCurrentDirectory: host.getCurrentDirectory.bind(host),
@@ -157,6 +169,7 @@ export function preprocess(opts?: Partial<PreprocessOptions>) {
       return
     }
 
+    filename = ts.sys.resolvePath(filename)
     const options = createPreprocessOptions(opts)
 
     const rootFiles = [filename]
