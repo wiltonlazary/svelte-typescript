@@ -13,10 +13,25 @@ import svelte from "rollup-plugin-svelte";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
+import typescript from "rollup-plugin-typescript2";
 
-import { preprocess } from "@pyoner/svelte-ts-preprocess";
+import {
+  preprocess,
+  createEnv,
+  readConfigFile
+} from "@pyoner/svelte-ts-preprocess";
 
 const production = !process.env.ROLLUP_WATCH;
+
+const env = createEnv();
+const compilerOptions = readConfigFile(env);
+const opts = {
+  env,
+  compilerOptions: {
+    ...compilerOptions,
+    allowNonTsExtensions: true
+  }
+};
 
 export default {
   input: "src/main.js",
@@ -35,7 +50,7 @@ export default {
       css: css => {
         css.write("public/bundle.css");
       },
-      preprocess: preprocess()
+      preprocess: preprocess(opts)
     }),
 
     // If you have external dependencies installed from
@@ -45,6 +60,7 @@ export default {
     // https://github.com/rollup/rollup-plugin-commonjs
     resolve(),
     commonjs(),
+    typescript(),
 
     // If we're building for production (npm run build
     // instead of npm run dev), minify
