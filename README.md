@@ -1,6 +1,11 @@
-# Typescript monorepo for Svelte v3 (preprocess, template, types)
+# Typescript monorepo for Svelte v3 includes
 
-## For Contributors
+* preprocess
+* template
+* types
+
+
+# For Contributors
 
 To install this monorepo you can use `lerna + npm`
 
