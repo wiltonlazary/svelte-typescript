@@ -12,7 +12,7 @@
   "author": "Jungle <devex.soft@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pyoner/svelte-types"
+    "url": "https://github.com/pyoner/svelte-typescript"
   },
   "license": "MIT",
   "engines": {
