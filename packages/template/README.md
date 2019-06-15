@@ -8,11 +8,18 @@ This is a project template for [Svelte](https://svelte.dev) apps. It lives at ht
 
 ## Install
 
-### For Linux, MacOs users
+### For Linux users
 ```bash
 mkdir svelte-app
 curl -L https://github.com/pyoner/svelte-typescript/tarball/master > svelte-typescript.tar
 tar --strip-components=3 --wildcards --one-top-level=svelte-app -xf svelte-typescript.tar */packages/template
+```
+
+### For Mac users
+```zsh
+mkdir svelte-app
+curl -L https://github.com/pyoner/svelte-typescript/tarball/master > svelte-typescript.tar
+tar --strip-components=3 -C svelte-app -xf svelte-typescript.tar '*/packages/template/' 
 ```
 
 ### For Windows users
