@@ -4,16 +4,19 @@
 
 # svelte app
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/pyoner/svelte-ts-template
+This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/pyoner/svelte-typescript
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## Install
 
+### For Linux, MacOs users
 ```bash
-npm install -g degit # you only need to do this once
-
-degit pyoner/svelte-ts-template svelte-app
-cd svelte-app
+mkdir svelte-app
+curl -L https://github.com/pyoner/svelte-typescript/tarball/master > svelte-typescript.tar
+tar --strip-components=3 --wildcards --one-top-level=svelte-app -xf svelte-typescript.tar */packages/template
 ```
+
+### For Windows users
+Download https://github.com/pyoner/svelte-typescript/archive/master.zip and extract template from `packages/template`
 
 *Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
