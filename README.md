@@ -1,8 +1,8 @@
 # Typescript monorepo for Svelte v3 includes
 
-* preprocess
-* template
-* types
+* [preprocess](https://github.com/pyoner/svelte-typescript/tree/master/packages/preprocess)
+* [template](https://github.com/pyoner/svelte-typescript/tree/master/packages/template)
+* [types](https://github.com/pyoner/svelte-typescript/tree/master/packages/types)
 
 
 # For Contributors
