@@ -32,4 +32,22 @@ let c: number = 5;
       expect(result.code).toBeTruthy()
     }
   })
+
+  it('should preserve all imports', () => {
+    const content = `import Form from './Form.svelte';
+import x from 'x-lib';
+`
+    const filename = 'Component.svelte'
+    const attributes = {
+      lang: 'ts'
+    }
+    const result = preprocess().script({
+      content,
+      filename,
+      attributes
+    })
+    if (result) {
+      expect(result).toHaveProperty('code', content)
+    }
+  })
 })
