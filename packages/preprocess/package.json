@@ -1,6 +1,6 @@
 {
   "name": "@pyoner/svelte-ts-preprocess",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Typescript preprocessor for Svelte 3",
   "keywords": [
     "svelte",
@@ -40,7 +40,7 @@
     "semantic-release-prepare": "ts-node tools/semantic-release-prepare",
     "precommit": "lint-staged",
     "travis-deploy-once": "travis-deploy-once",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "lint-staged": {
     "{src,test}/**/*.ts": [
