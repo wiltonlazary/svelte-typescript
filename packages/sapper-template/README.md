@@ -1,13 +1,28 @@
 # sapper-template
 
-The default [Sapper](https://github.com/sveltejs/sapper) template, with branches for Rollup and webpack. To clone it and get started:
+## Install
+
+### For Linux users
+```bash
+mkdir sapper-app
+curl -L https://github.com/pyoner/svelte-typescript/tarball/master > svelte-typescript.tar
+tar --strip-components=3 --wildcards --one-top-level=sapper-app -xf svelte-typescript.tar */packages/sapper-template
+```
+
+### For Mac users
+```zsh
+mkdir sapper-app
+curl -L https://github.com/pyoner/svelte-typescript/tarball/master > svelte-typescript.tar
+tar --strip-components=3 -C sapper-app -xf svelte-typescript.tar '*/packages/sapper-template/' 
+```
+
+### For Windows users
+Download https://github.com/pyoner/svelte-typescript/archive/master.zip and extract template from `packages/sapper-template`
+
+## Usage
 
 ```bash
-# for Rollup
-npx degit "sveltejs/sapper-template#rollup" my-app
-# for webpack
-npx degit "sveltejs/sapper-template#webpack" my-app
-cd my-app
+cd sapper-app
 npm install # or yarn!
 npm run dev
 ```
