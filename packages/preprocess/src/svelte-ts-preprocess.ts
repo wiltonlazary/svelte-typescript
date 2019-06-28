@@ -142,7 +142,7 @@ export function readConfigFile(env: Env, path?: string) {
 export interface PreprocessOptions {
   compilerOptions: ts.CompilerOptions
   env: Env
-  showErrors: boolean
+  hideErrors: boolean
 }
 
 export function createPreprocessOptions(opts?: Partial<PreprocessOptions>): PreprocessOptions {
@@ -151,7 +151,7 @@ export function createPreprocessOptions(opts?: Partial<PreprocessOptions>): Prep
   return {
     compilerOptions: opts.compilerOptions ? opts.compilerOptions : defaultCompilerOptions,
     env: opts.env ? opts.env : createEnv(),
-    showErrors: opts.showErrors ? opts.showErrors : true
+    hideErrors: !!opts.hideErrors
   }
 }
 
@@ -191,7 +191,7 @@ export function preprocess(opts?: Partial<PreprocessOptions>) {
     const program = ts.createProgram(rootFiles, options.compilerOptions, proxyHost)
     program.emit(undefined, writeFile, undefined, undefined, customTransformers)
 
-    if (options.showErrors) {
+    if (!options.hideErrors) {
       const diagnostics = clearDiagnostics(ts.getPreEmitDiagnostics(program))
       if (diagnostics.length) {
         const s = ts.formatDiagnosticsWithColorAndContext(
