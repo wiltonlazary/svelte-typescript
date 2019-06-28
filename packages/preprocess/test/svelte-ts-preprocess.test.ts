@@ -50,4 +50,23 @@ import x from 'x-lib';
       expect(result).toHaveProperty('code', content)
     }
   })
+
+  it('should hide errors', () => {
+    const content = `import Form from './Form.svelte';
+import x from 'x-lib';
+`
+    const filename = 'Component.svelte'
+    const attributes = {
+      lang: 'ts'
+    }
+    const opts = { hideErrors: true }
+    const result = preprocess(opts).script({
+      content,
+      filename,
+      attributes
+    })
+    if (result) {
+      expect(result).toHaveProperty('code', content)
+    }
+  })
 })
