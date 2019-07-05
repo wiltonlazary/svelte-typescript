@@ -1,3 +1,5 @@
+import fs from 'fs'
+import path from 'path'
 import ts from 'typescript'
 
 const LANGS = ['ts', 'typescript']
@@ -93,7 +95,8 @@ interface Script {
   filename: string
   content: string
   attributes: {
-    lang?: string
+    lang?: string,
+    src?: string
   }
 }
 
@@ -164,6 +167,12 @@ export function preprocess(opts?: Partial<PreprocessOptions>) {
     const lang = attributes.lang.toLowerCase()
     if (!LANGS.includes(lang)) {
       return
+    }
+
+    if (attributes.src) {
+      const dir = path.parse(filename).dir
+      filename = path.join(dir, attributes.src)
+      content = fs.readFileSync(filename).toString()
     }
 
     filename = ts.sys.resolvePath(filename)
